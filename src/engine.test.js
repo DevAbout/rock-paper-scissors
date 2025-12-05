@@ -1,23 +1,34 @@
 import { expect, describe, it } from 'vitest'
+import {
+    getGameResult,
+    winningMessage,
+    loosingMessage,
+    drawMessage,
+} from './engine'
 
-const loosingMessage = 'You loose!!!'
-const drawMessage = 'It is a draw'
-
-const moves = ['rock', 'paper', 'scissors', 'rock']
-
-function getGameResult(playerMove, computerMove) {
-    const playerMoveIndex = moves.indexOf(playerMove)
-    const computerMoveIndex = moves.lastIndexOf(computerMove)
-
-    if (playerMoveIndex + 1 === computerMoveIndex) {
-        return loosingMessage
-    }
-
-    return drawMessage
-}
-
-// write a failing test, make it pass, refactor (clean up)
+// Test Driven Development (TDD) - write a failing test, make it pass, refactor (clean up)
 describe('game result', () => {
+    it('should be player wins when the player chooses scissors and the computer chooses paper', () => {
+        const playerMove = 'scissors'
+        const computerMove = 'paper'
+        const actual = getGameResult(playerMove, computerMove)
+        expect(actual).toBe(winningMessage)
+    })
+
+    it('should be player wins when the player chooses paper and the computer chooses rock', () => {
+        const playerMove = 'paper'
+        const computerMove = 'rock'
+        const actual = getGameResult(playerMove, computerMove)
+        expect(actual).toBe(winningMessage)
+    })
+
+    it('should be player wins when the player chooses rock and the computer chooses scissors', () => {
+        const playerMove = 'rock'
+        const computerMove = 'scissors'
+        const actual = getGameResult(playerMove, computerMove)
+        expect(actual).toBe(winningMessage)
+    })
+
     it('should be player looses when the player chooses rock and the computer chooses paper', () => {
         const playerMove = 'rock'
         const computerMove = 'paper'
